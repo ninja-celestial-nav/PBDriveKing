@@ -1,0 +1,6 @@
+# Exclude backend from Vercel frontend build
+backend/
+node_modules/
+.next/
+*.mp4
+.DS_Store

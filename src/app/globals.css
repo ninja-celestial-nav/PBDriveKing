@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+/* ─── Neon Pickleball Theme ─── */
+:root {
+  --background: #0a0e17;
+  --foreground: #e8edf5;
+  --neon-primary: #39FF14;
+  --neon-secondary: #00FF87;
+  --neon-accent: #00E5FF;
+  --neon-warning: #FFD700;
+  --neon-danger: #FF4444;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-hover: rgba(255, 255, 255, 0.08);
+  --surface-border: rgba(57, 255, 20, 0.15);
+  --glass-bg: rgba(10, 14, 23, 0.75);
+  --glass-border: rgba(57, 255, 20, 0.2);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-neon: var(--neon-primary);
+  --color-neon-secondary: var(--neon-secondary);
+  --color-neon-accent: var(--neon-accent);
+  --color-neon-warning: var(--neon-warning);
+  --color-neon-danger: var(--neon-danger);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-border: var(--surface-border);
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
+  --font-sans: var(--font-outfit), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(57, 255, 20, 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(57, 255, 20, 0.5);
+}
+
+/* ─── Animations ─── */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(57, 255, 20, 0.3), 0 0 20px rgba(57, 255, 20, 0.1); }
+  50% { box-shadow: 0 0 20px rgba(57, 255, 20, 0.5), 0 0 40px rgba(57, 255, 20, 0.2); }
+}
+
+@keyframes neon-flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.8; }
+  94% { opacity: 1; }
+  96% { opacity: 0.9; }
+  97% { opacity: 1; }
+}
+
+@keyframes skeleton-draw {
+  0% { stroke-dashoffset: 1000; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes score-reveal {
+  0% { transform: scale(0.5); opacity: 0; }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slide-in-right {
+  0% { transform: translateX(30px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slide-in-up {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes gauge-fill {
+  0% { stroke-dasharray: 0 283; }
+}
+
+/* ─── Utility Classes ─── */
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-neon-flicker { animation: neon-flicker 4s ease-in-out infinite; }
+.animate-skeleton-draw { animation: skeleton-draw 2s ease-out forwards; stroke-dasharray: 1000; stroke-dashoffset: 1000; }
+.animate-score-reveal { animation: score-reveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.animate-slide-in-right { animation: slide-in-right 0.5s ease-out forwards; }
+.animate-slide-in-up { animation: slide-in-up 0.4s ease-out forwards; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+}
+
+.neon-glow {
+  box-shadow: 0 0 10px rgba(57, 255, 20, 0.3), 0 0 20px rgba(57, 255, 20, 0.1);
+}
+
+.neon-text {
+  color: var(--neon-primary);
+  text-shadow: 0 0 10px rgba(57, 255, 20, 0.5), 0 0 20px rgba(57, 255, 20, 0.3);
+}
+
+.neon-border {
+  border: 1px solid rgba(57, 255, 20, 0.3);
+  box-shadow: inset 0 0 20px rgba(57, 255, 20, 0.05);
+}
+
+/* ─── Range Slider ─── */
+input[type="range"].neon-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: rgba(57, 255, 20, 0.15);
+  border-radius: 2px;
+  outline: none;
+}
+input[type="range"].neon-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--neon-primary);
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(57, 255, 20, 0.6);
+  transition: transform 0.15s ease;
+}
+input[type="range"].neon-range::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* ─── Upload Zone ─── */
+.upload-zone {
+  border: 2px dashed rgba(57, 255, 20, 0.25);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+.upload-zone:hover,
+.upload-zone.drag-over {
+  border-color: var(--neon-primary);
+  background: rgba(57, 255, 20, 0.03);
+  box-shadow: 0 0 30px rgba(57, 255, 20, 0.1);
+}
+
+/* ─── Grid Background ─── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(57, 255, 20, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57, 255, 20, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
